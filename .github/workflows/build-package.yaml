@@ -100,7 +100,8 @@ jobs:
       - name: Update Repo Descriptions
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.PAT }}
+          # See: https://dev.to/github/the-githubtoken-in-github-actions-how-it-works-change-permissions-customizations-3cgp 
+          github-token: ${{ github.token }}
           script: |
             const apiLevel = `${{ github.event.inputs.apiLevel }}`;
 
