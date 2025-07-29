@@ -42,9 +42,10 @@ jobs:
       - name: Modify the build script to use "android-${{ github.event.inputs.apiLevel }}" as the top-level directory
         run: cat development/build/tools/mk_sources_zip.py | sed -e 's/TOP_FOLDER = .*/TOP_FOLDER = "android-${{ github.event.inputs.apiLevel }}"/' > mk_sources_zip.py
 
-      - name: Install Python2
-        run: sudo apt install -y python2
-
+      - uses: LizardByte/actions/actions/setup_python@master
+        with:
+          python-version: '2.7'
+          
       - name: Generate the ZIP package
         run: python2 mk_sources_zip.py -z source.properties sources-${{ github.event.inputs.apiLevel }}.zip .
 
