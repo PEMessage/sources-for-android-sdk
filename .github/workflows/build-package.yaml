@@ -7,15 +7,15 @@ on:
       branch:
         description: "SDK Platform Source Branch Name"
         required: true
-        default: "master"
+        default: "lineage-20.0"
       apiLevel:
         description: "API Level (Integer only)"
         required: true
-        default: "34"
+        default: "33"
       versionName:
         description: "Android Version Name"
         required: false
-        default: "14"
+        default: "13"
 
 jobs:
   build-sources-package:
@@ -32,9 +32,9 @@ jobs:
         run: |
           branchName=${{ github.event.inputs.branch }}
 
-          git clone https://github.com/aosp-mirror/platform_frameworks_base.git --branch $branchName --depth 1 frameworks/base
-          git clone https://android.googlesource.com/platform/libcore --branch $branchName --depth 1
-          git clone https://github.com/aosp-mirror/platform_development.git --branch $branchName --depth 1 development
+          git clone https://github.com/LineageOS/android_frameworks_base.git --branch $branchName --depth 1 frameworks/base
+          git clone https://github.com/LineageOS/android_libcore.git --branch $branchName --depth 1
+          git clone https://github.com/LineageOS/android_development.git --branch $branchName --depth 1 development
 
       - name: Create a basic source.properties file
         run: echo -e "Pkg.UserSrc=false\nPkg.Revision=0\nAndroidVersion.ApiLevel=${{ github.event.inputs.apiLevel }}\nAndroidVersion.IsBaseSdk=true" > source.properties
